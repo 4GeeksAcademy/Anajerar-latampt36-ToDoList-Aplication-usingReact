@@ -15,6 +15,10 @@ function keyHandler(e) {
 						}
 				}
 
+function taskHoverHandler(e) {
+	e.target.lastChild.hidden=false
+}
+
 	return (
 		<>
 			<h1 className="text-center">ToDos</h1>
@@ -29,10 +33,11 @@ function keyHandler(e) {
 						{toDo.map((task,indx)=>{
 							return (
 								
-									<li className="list-item d-flex justify-content-between mt-2 pb-2" key={indx}>
+									<li className="list-item d-flex justify-content-between mt-2 pb-2" hidden={true} key={indx}
+										onMouseOver={taskHoverHandler}>
 										<span className="ps-4">{task}</span>
 										<button type="button" className="btn-close pe-5" aria-label="Close"
-										onClick={() => setToDo(toDo.filter((t,thisIndex) => indx != thisIndex)) }></button>
+										onClick={() => setToDo(toDo.filter((t,thisIndex) => indx != thisIndex)) } hidden={true}></button>
 									</li>								
 								
 									)
@@ -41,7 +46,7 @@ function keyHandler(e) {
 											
 					</ul>
 			
-				<p>{toDo.length} {toDo.length==1 ? "item" : "items"} left</p>
+				{toDo.length == 0 ? <p className="tabs-borders">No hay tareas, agrega una </p> : <p className="tabs-boders">{toDo.length} items left</p>}
 			
 			<div className="small-div" style={{width:"49%"}}></div>
 			<div className="small-div" style={{width:"48%"}}></div>
